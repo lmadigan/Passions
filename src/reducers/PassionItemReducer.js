@@ -1,4 +1,4 @@
-import { FETCH_PASSION_ITEMS_SUCCESS } from '../actions/types';
+import { FETCH_PASSION_ITEMS_SUCCESS, ADD_PASSION } from '../actions/types';
 
 const INITIAL_STATE = {
   passionItems: {}
@@ -7,7 +7,9 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_PASSION_ITEMS_SUCCESS:
-      return { ...state, passionItems: action.payload }
+      return { passionItems: action.payload };
+    case ADD_PASSION:
+      return { state };
     default:
       return state;
   }
