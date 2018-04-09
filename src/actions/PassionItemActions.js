@@ -7,7 +7,8 @@ export const fetchPassions = () => {
 
   return (dispatch) => {
     firebase.database().ref(`users/${currentUser.uid}/passions`)
-    .on('value', snapshit => {
+    .on('value', snapshot => {
+      console.log(snapshot);
       dispatch({ type: FETCH_PASSION_ITEMS_SUCCESS, payload: snapshot.val()});
     });
   };
@@ -15,12 +16,11 @@ export const fetchPassions = () => {
 
 export const addPassion = ({ passion }) => {
   const { currentUser } = firebase.auth();
-
   return (dispatch) => {
     firebase.database().ref(`users/${currentUser.uid}/passions`)
     .push({ passion })
     .then(() => {
-      dispatch({ type: ADD_PASSIONS });
+      dispatch({ type: ADD_PASSION, payload: passion });
     });
   };
 };

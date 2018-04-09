@@ -3,5 +3,6 @@ import AuthReducer from './AuthReducer';
 import PassionItemReducer from './PassionItemReducer';
 
 export default combineReducers({
-  auth: AuthReducer
+  auth: AuthReducer,
+  passions: PassionItemReducer
 });

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, ListView } from 'react-native';
+import { View, Text, ListView, TouchableOpacity } from 'react-native';
+import { CardSection } from './common';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { fetchPassions } from '../actions';
+import PassionItem from './PassionItem';
 
 class PassionsList extends Component {
+
   componentWillMount() {
     this.props.fetchPassions();
 
@@ -17,16 +21,22 @@ class PassionsList extends Component {
     this.createDataSource(nextProps);
   }
 
-  createDataSource({ passionItems }) {
+  createDataSource({ passions }) {
     const ds = new ListView.DataSource({
           rowHasChanged: (r1, r2) => r1 !== r2
       });
 
-    this.dataSource = ds.cloneWithRows(passionItems);
+    this.dataSource = ds.cloneWithRows(passions);
   }
 
-  renderRow(passionItem) {
-    return <Text>{passionItem.name}</Text>;
+  onPress() {
+    console.log("Pressed!!");
+  }
+
+  renderRow(passion) {
+    return (
+      <PassionItem passion={passion} onPress={this.onPress} />
+    );
   }
 
   render() {
@@ -41,9 +51,27 @@ class PassionsList extends Component {
   }
 }
 
+
 const mapStateToProps = (state) => {
-  const { passionItems } = state;
-  return { passionItems };
+  const { passionItems } = state.passions;
+  const passions = _.map(passionItems, (val, uid) => {
+    return { ...val, uid };
+  });
+  return { passions };
 };
+
+const styles = {
+  cardsectionStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 0
+  },
+  textStyle: {
+    padding: 10,
+    color: '#4c5267',
+    fontSize: 22
+  }
+}
 
 export default connect(mapStateToProps, { fetchPassions })(PassionsList);

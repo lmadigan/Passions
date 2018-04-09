@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+import { View, Text } from 'react-native';
+import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import { View, Text } from 'react-native';
-import RouterComponent from './Router';
 import firebase from 'firebase';
 import reducer from './reducers';
+import RouterComponent from './Router';
+import { store } from '../index';
 
 class App extends Component {
   componentWillMount() {
@@ -21,7 +22,7 @@ class App extends Component {
   }
 
   render() {
-    const store = createStore(reducer, {}, applyMiddleware(ReduxThunk));
+    // const store = createStore(reducer, {}, applyMiddleware(ReduxThunk));
 
     return (
       <Provider store={store}>
@@ -32,6 +33,3 @@ class App extends Component {
 }
 
 export default App;
-
-//to debug go to =>
-//http://localhost:8081/debugger-ui/
