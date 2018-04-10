@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ListView, TouchableOpacity } from 'react-native';
 import { CardSection } from './common';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
 import { fetchPassions } from '../actions';
 import PassionItem from './PassionItem';
@@ -29,22 +30,20 @@ class PassionsList extends Component {
     this.dataSource = ds.cloneWithRows(passions);
   }
 
-  onPress() {
-    console.log("Pressed!!");
+  onPress(passionItem) {
+    console.log(passionItem);
+    Actions.passionView({ passionItem: passionItem });
   }
 
-  renderRow(passion) {
-    return (
-      <PassionItem passion={passion} onPress={this.onPress} />
-    );
-  }
 
   render() {
+
     return (
       <ListView
         enableEmptySections
         dataSource={this.dataSource}
-        renderRow={this.renderRow}
+        renderRow={(rowData) =>
+          <PassionItem passion={rowData} onPress={this.onPress.bind(rowData)} />}
       >
       </ListView>
     );
