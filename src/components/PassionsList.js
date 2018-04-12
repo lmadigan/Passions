@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { View, Text, ListView, TouchableOpacity } from 'react-native';
 import { CardSection } from './common';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
-import { fetchPassions } from '../actions';
+import { Actions } from 'react-native-router-flux';
+import { fetchPassions, setPassion } from '../actions';
 import PassionItem from './PassionItem';
 
 class PassionsList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { passion: {}}
+    this.onPress = this.onPress.bind(this);
+    // this.setState = this.setState.bind(this);
+  }
 
   componentWillMount() {
     this.props.fetchPassions();
@@ -30,21 +36,24 @@ class PassionsList extends Component {
     this.dataSource = ds.cloneWithRows(passions);
   }
 
-  onPress(passionItem) {
-    console.log(passionItem);
-    Actions.passionView({ passionItem: passionItem });
+  onPress(passion) {
+    console.log("Pressed");
+    this.props.setPassion(passion)
   }
 
 
   render() {
+    const onPress = this.onPress;
 
     return (
       <ListView
         enableEmptySections
         dataSource={this.dataSource}
         renderRow={(rowData) =>
-          <PassionItem passion={rowData} onPress={this.onPress.bind(rowData)} />}
-      >
+            <PassionItem passion={rowData} onItemPress={onPress}/>
+        }
+        >
+
       </ListView>
     );
   }
@@ -73,4 +82,4 @@ const styles = {
   }
 }
 
-export default connect(mapStateToProps, { fetchPassions })(PassionsList);
+export default connect(mapStateToProps, { fetchPassions, setPassion })(PassionsList);

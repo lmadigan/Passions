@@ -1,16 +1,18 @@
-import { FETCH_PASSION_ITEMS_SUCCESS, ADD_PASSION } from '../actions/types';
+import { FETCH_PASSION_ITEMS_SUCCESS, ADD_PASSION, SET_PASSION } from '../actions/types';
 
 const INITIAL_STATE = {
-  passionItems: {}
+  passionItems: {},
+  passion: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action);
   switch (action.type) {
     case FETCH_PASSION_ITEMS_SUCCESS:
       return { passionItems: action.payload };
     case ADD_PASSION:
       return { ...state };
+    case SET_PASSION:
+      return { ...state, passion: action.payload };
     default:
       return state;
   }

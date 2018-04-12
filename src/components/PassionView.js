@@ -6,14 +6,19 @@ class PassionView extends Component {
 
 
   render() {
-    console.log(this.props.passionItem);
-    const { passion, uid } = this.props.passionItem;
+    console.log(this.props);
+
     return (
       <View>
-        <Text>{passion}</Text>
+        <Text>{this.props.passion}</Text>
       </View>
     );
   }
  }
 
-export default PassionView;
+ const mapStateToProps = (state) => {
+   const { passion } = state.passions;
+   return { passion };
+ };
+
+export default connect(mapStateToProps, {})(PassionView);
