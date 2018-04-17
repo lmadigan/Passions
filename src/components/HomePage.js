@@ -43,18 +43,18 @@ class HomePage extends Component {
     }
   }
 
- //  getPhotosFromGallery() {
- //   CameraRoll.getPhotos({ first: 1000000 })
- //     .then(res => {
- //       console.log(res, "images data")
- //     })
- // }
+  // getPhotosFromGallery() {
+  //  CameraRoll.getPhotos({ first: 1000000 })
+  //    .then(res => {
+  //      console.log(res, "images data")
+  //    });
+  //  }
 
   render(){
     const { viewStyle } = styles ;
 
     return (
-      <Card stylr={viewStyle}>
+      <Card style={viewStyle}>
         <PhotoUpload />
         <PassionsList />
         <CardSection>

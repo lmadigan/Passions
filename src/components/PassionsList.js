@@ -10,7 +10,7 @@ import PassionItem from './PassionItem';
 class PassionsList extends Component {
   constructor(props) {
     super(props);
-    this.state = { passion: {}}
+    this.state = { passion: {}};
     this.onPress = this.onPress.bind(this);
     // this.setState = this.setState.bind(this);
   }
@@ -37,7 +37,6 @@ class PassionsList extends Component {
   }
 
   onPress(passion) {
-    console.log("Pressed");
     this.props.setPassion(passion)
   }
 

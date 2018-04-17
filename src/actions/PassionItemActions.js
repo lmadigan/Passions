@@ -24,7 +24,7 @@ export const addPassion = ({ passion }) => {
   };
 };
 
-export const setPassion = ({ passion }) => {
+export const setPassion = ( passion ) => {
   return (dispatch) => {
     dispatch({type: SET_PASSION, payload: passion});
 
