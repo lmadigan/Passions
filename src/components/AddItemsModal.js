@@ -5,15 +5,10 @@ import { Button } from './common';
 
 
 class AddItem extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { passion: {}}
-  //
-  // }
 
   render(){
     console.log(this.props);
-    const { viewStyle } = styles;
+    const { viewStyle, containerStyle } = styles;
     return(
       <Modal
         visible={this.props.visible}
@@ -21,6 +16,7 @@ class AddItem extends Component {
         animationType="fade"
         onRequestClose={() => {}}
         >
+        <View style={containerStyle}>
         <View style={viewStyle}>
           <CardSection>
             <Text>Label</Text>
@@ -38,6 +34,7 @@ class AddItem extends Component {
             <Text>Link</Text>
           </CardSection>
         </View>
+        </View>
         </Modal>
     );
   }
@@ -48,7 +45,7 @@ const height = Dimensions.get("window").height;
 
 const styles = {
   viewStyle: {
-    height: height,
+    height: 400,
     padding: 15,
     borderRadius: 5,
     shadowColor: '#575757',
@@ -58,6 +55,12 @@ const styles = {
     },
     shadowRadius: 3,
     shadowOpacity: 1.0
+  },
+  containerStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    height: height
+
   }
 };
 

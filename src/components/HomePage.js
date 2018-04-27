@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, CameraRoll, Dimensions } from 'react-native';
+import { View, Text, TextInput, CameraRoll, Dimensions, ImagePickerIOS } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from './common';
 import PassionsList from './PassionsList';
@@ -11,9 +11,17 @@ import PhotoUpload from './PhotoUpload';
 
 
 class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      passion: '',
+      addingItem: null
+    };
+    this.getPhotosFromGallery = this.getPhotosFromGallery.bind(this);
+  }
+
   state = {
-    passion: '',
-    addingItem: null
+
   };
 
   onInputChange(text) {
@@ -43,19 +51,24 @@ class HomePage extends Component {
     }
   }
 
-  // getPhotosFromGallery() {
-  //  CameraRoll.getPhotos({ first: 1000000 })
-  //    .then(res => {
-  //      console.log(res, "images data")
-  //    });
-  //  }
+  getPhotosFromGallery() {
+    console.log("Photos");
+   // CameraRoll.getPhotos({ first: 1000000 })
+   //   .then(res => {
+   //     console.log(res, "images data")
+   //   });
+   ImagePickerIOS.openSelectDialog({}, imageUri => {
+      this.setState({ image: imageUri });
+    }, error => console.error(error));
+
+   }
 
   render(){
     const { viewStyle } = styles ;
 
     return (
       <Card style={viewStyle}>
-        <PhotoUpload />
+        <PhotoUpload onPress={this.getPhotosFromGallery}/>
         <PassionsList />
         <CardSection>
           {this.addNewPassion()}
